@@ -21,6 +21,7 @@ app.engine('.hbs', exphbs({
     //Confirugacion del motor de plantilla
     helpers: require('./lib/handlebars')
 }));
+
 //Motor de plantilla
 app.set('view engine','.hbs');
 //Middlewares
@@ -38,7 +39,13 @@ app.use((req, res, next) =>{
 
 //Routes
 app.use(require('./routes/index'));
+app.use(require('./routes/authentication'));
+app.use('links',require('./routes/links'));
+//Para cuando quieras ver todas las rutas solo vas a tener que postear links
+
 //Public
+
+
 
 //Starting the server
 app.listen(app.get('port'), () => {
