@@ -44,7 +44,7 @@ app.use('links',require('./routes/links'));
 //Para cuando quieras ver todas las rutas solo vas a tener que postear links
 
 //Public
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 //Starting the server
