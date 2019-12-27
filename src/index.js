@@ -15,7 +15,7 @@ app.use(morgan('dev'));
 
 
 //Routes
-
+app.use(require('./routes/index'));
 //Public
 
 //Starting the server
