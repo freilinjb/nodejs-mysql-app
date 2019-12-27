@@ -10,23 +10,20 @@ const app = express();
 //Settings
 app.set('port', process.env.PORT || 4000);
 
-// app.set('views',path.join(__dirname,'views'))
-// app.engine('.hbs', exphbs({
-//     defaultLayout: 'main',
-//     //Agregando la carpeta layouts a para que nodejs la reconosca
-//     layoutsDir: path.join(app.get('views'), 'layouts'),
-//     //Agregando la carpeta partialas para que njs la reconosca
-//     partialsDir: path.join(app.get('views', 'partials')),
-//     //extension del motor de plantilla
-//     extname: '.hbs',
-//     //Confirugacion del motor de plantilla
-//     helpers: require('./lib/handlebars')
-// }));
+app.set('views', path.join(__dirname,'views'));
+app.engine('.hbs', exphbs({
+    defaultLayout: 'main',
+    layoutsDir:  path.join(app.get('views'), 'layouts'),
+    partialsDir: path.join(app.get('views'), 'partials'),
+    extname: '.hbs',
+    helpers: require('./lib/handlebars')
+    
+}))
 
-//Motor de plantilla
-// app.set('view engine','.hbs');
-// //Middlewares
-// app.use(morgan('dev'));
+app.set('view engine', '.hbs');
+
+//Middlewares
+app.use(morgan('dev'));
 // //Aceptar los datos que envia el usuario
 // app.use(express.urlencoded({extends: false}));
 // //Para recibir JSON desde nuestra aplicacion
