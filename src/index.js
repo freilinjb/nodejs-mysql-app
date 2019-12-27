@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const path  = require('path');
 
+
 //Initializations
 const app = express();
 
@@ -36,13 +37,10 @@ app.use(express.json());
 app.use((req, res, next) =>{
     next();
 })
+sdaf
 
-//Routes
+//Routesasdfsdfasdf
 app.use(require('./routes/index'));
-app.use(require('./routes/authentication'));
-app.use('links',require('./routes/links'));
-//Para cuando quieras ver todas las rutas solo vas a tener que postear links
-
 //Public
 app.use(express.static(path.join(__dirname, 'public')));
 
