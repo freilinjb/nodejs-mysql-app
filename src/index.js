@@ -24,19 +24,21 @@ app.set('view engine', '.hbs');
 
 //Middlewares
 app.use(morgan('dev'));
-// //Aceptar los datos que envia el usuario
-// app.use(express.urlencoded({extends: false}));
-// //Para recibir JSON desde nuestra aplicacion
-// app.use(express.json());
+// //Aceptar los datos (formulkarios) que envia el usuario
+app.use(express.urlencoded({extended: false}));
+// //Para recibir JSON desde nuestra aplicacion - y validar lo que podemos conseguir en futuras mejoras
+app.use(express.json());
 
 //Global Variables
 //Toma la informacion del usuario, toma lo que el servidor quiere reponder, toma una funcion para continuar el resto del codigo
 app.use((req, res, next) =>{
     next();
-})
+});
 
 //Routes
 app.use(require('./routes/index'));
+app.use(require('./routes/authentication'));
+app.use('links',require('./routes/links'));
 //Public
 app.use(express.static(path.join(__dirname, 'public')));
 
