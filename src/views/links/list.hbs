@@ -1,7 +1,24 @@
-<div class="container p-4">
+<div class="container p-4" style="margin-top: 80px;">
     <div class="row">
         {{#each links}}
-            {{this}}
+        <div class="col-md-6 mx-auto mb-2">
+            <div class="card text-center">
+                <div class="card-body">
+                    <a href="{{url}}" target="_blank">
+                        <h3 class="card-title text-uppercase">
+                            {{title}}
+                        </h3>
+                    </a>
+                    <p class="m-2"> {{description}}</p>
+                    <p>{{create_at}}</p>
+                    <div class="">
+                        <a href="" class="btn btn-danger btn-block">Delete Link</a>
+                        <a href="" class="btn btn-secondary btn-block">Edit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{!-- {{this}} --}}
         {{/each}}
     </div>
 </div>
