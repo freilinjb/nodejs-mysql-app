@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 //Coneccion de base de dato
-const pool = require('../database').default;
+const pool = require('../database');
 
 //PROBANDO SI FUNCIONA EL DIRECTORIO
 // router.get('/add', (req, res)=>{
@@ -40,6 +40,6 @@ router.get('/', async (req, res) =>{
     // res.send('Listas iran aqui')
     res.render('links/list', {links});
     
-})
+});
 
 module.exports = router;
