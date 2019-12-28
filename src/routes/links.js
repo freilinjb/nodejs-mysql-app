@@ -32,6 +32,13 @@ router.post('/add', async (req,res) =>{
     // console.log('INSERT INTO links set ?',[newLink]);
     
     res.send('Reciviend');
+});
+
+router.get('/', async (req, res) =>{
+    const links = await pool.query('SELECT * FROM links');
+    console.log(links);
+    res.send('Listas iran aqui')
+    
 })
 
 module.exports = router;
