@@ -16,7 +16,7 @@ app.engine('.hbs', exphbs({
     layoutsDir:  path.join(app.get('views'), 'layouts'),
     partialsDir: path.join(app.get('views'), 'partials'),
     extname: '.hbs',
-    helpers: require('./lib/handlebars')
+    helpers: require('./lib/handlebars').default
     
 }))
 
@@ -37,7 +37,7 @@ app.use((req, res, next) =>{
 
 //Routes
 app.use(require('./routes/index'));
-app.use(require('./routes/authentication'));
+app.use(require('./routes/authentication').default.default.default);
 app.use('/links',require('./routes/links'));
 //Public
 app.use(express.static(path.join(__dirname, 'public')));
