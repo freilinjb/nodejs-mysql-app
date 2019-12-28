@@ -14,8 +14,8 @@ router.get('/add', (req, res)=>{
     res.render('links/add');
 })
 
-
-router.post('/add', (req,res) =>{
+//Funcion async - asincrona
+router.post('/add', async (req,res) =>{
     // console.log(req.body);
 
     const { title, url, description } = req.body;
@@ -24,7 +24,12 @@ router.post('/add', (req,res) =>{
         url,
         description
     }
+    //Esto va a tomar tiempo
     console.log(newLink);
+    
+    // await pool.query('INSERT INTO links(title,url,description) VALUES(?,?,?)',title,url,description);
+    await pool.query('INSERT INTO links set ?',[newLink]);
+    // console.log('INSERT INTO links set ?',[newLink]);
     
     res.send('Reciviend');
 })
