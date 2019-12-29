@@ -3,11 +3,18 @@ const bcrypt = require('bcryptjs');
 const helpers = {};
 
 //Para cuando el usuario se registra
+// helpers.encryptPassword = async (password) => {
+//     const salt = await bcrypt.genSalt(10); //Genera un patron
+//     const hash = await bcrypt.hash(password,salt) // Sifra la clave basado en las cadenas
+//     return hash;
+// };
+
 helpers.encryptPassword = async (password) => {
-    const salt = await bcrypt.genSalt(10); //Genera un patron
-    const hash = await bcrypt.hash(password,salt) // Sifra la clave basado en las cadenas
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(password, salt);
     return hash;
 };
+
 
 //Para el logueo -- Le puedes poner el nombre que quieras
 helpers.matchPassword = async (password, savedPassword) => {

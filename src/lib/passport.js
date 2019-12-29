@@ -19,9 +19,10 @@ passport.use('local.signup', new LocalStrategy({
         fullname
     };
     //Cifra la clave antes de guardarla
-    // newUser.password = await helpers.encryptPassword(passport);
+    newUser.username = username.toLowerCase();
+    newUser.password = await helpers.encryptPassword(newUser.password);
     const result = await pool.query('INSERT INTO users SET ? ', newUser);
-    console.log(newUser.password);
+    console.log('Clave',newUser.password);
     console.log(result);
 }));
 
