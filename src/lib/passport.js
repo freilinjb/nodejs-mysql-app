@@ -8,7 +8,6 @@ passport.use('local.singup', new LocalStrategy({
 }, async (req, username, password, done) =>{ //Funcion que se activa al autenticar
 
     console.log(req.body);
-    
 }));
 
 // passport.serializeUser((usr, done) =>{
