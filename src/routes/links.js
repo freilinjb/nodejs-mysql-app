@@ -47,6 +47,17 @@ router.get('/delete/:id', async(req,res)=>{
     const { id } = req.params;
     await pool.query('DELETE FROM links WHERE ID = ?', [id]);
     res.redirect('/links');
-})
+});
+
+router.get('/edit/:id', async(req,res)=>{
+    // console.log(req.params.id);
+    // res.send('DELETED');
+    const { id } = req.params;
+    // await pool.query('UPDATE FROM links SET  WHERE ID = ?', [id]);
+    // res.redirect('/links');
+    res.send('RECIVED');
+    console.log('REVICED');
+    
+});
 
 module.exports = router;
