@@ -3,9 +3,9 @@ const router = express.Router();
 
 const passport = require('passport');
 
-router.get('/signup', (req, res) =>{
-    res.render('auth/signup')
-})
+router.get('/signup', (req, res) => {
+    res.render('auth/signup');
+});
 
 // router.post('/signup', (req, res) =>{
 //     // console.log(req.body);
@@ -15,14 +15,13 @@ router.get('/signup', (req, res) =>{
 //         failureFlash: true  //Acepta enviar mensaje atravez de flash
 //     });
 //     res.send('received');
-//      console.log(req.body);
 // });
 
-router.post('/signup', passport.authenticate('local.singup', {
-    successRedirect: '/profile', //Enviar cuando todo este funcionando
+router.post('/signup', passport.authenticate('local.signup', {
+    successRedirect: '/profile',
     failureRedirect: '/signup',
-    failureFlash: true 
-}));
+    failureFlash: true
+  }));
 
 router.get('/profile', (req, res) =>{
     res.send('This is your Profile');
