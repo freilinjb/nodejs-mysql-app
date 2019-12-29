@@ -59,4 +59,19 @@ router.get('/edit/:id', async(req,res)=>{
     res.render('links/edit', {link: link[0]});
 });
 
+router.post('/edit/:id', async(req, res)=>{
+    const { id } = req.params;
+    const { } = req.body;
+
+    const { title, url, description } = req.body;
+    const newLink = {
+        title,
+        description,
+        url
+    };
+    console.log(newLink);
+    res.send('UPDATED')
+    
+});
+
 module.exports = router;
