@@ -53,10 +53,10 @@ router.get('/edit/:id', async(req,res)=>{
     // console.log(req.params.id);
     // res.send('DELETED');
     const { id } = req.params;
-    const links = await pool.query('SELECT * FROM links WHERE id = ?', [id]);
-    console.log(links);
-    
-    res.render('links/edit', {links: links});
+    const link = await pool.query('SELECT * FROM links WHERE id = ?', [id]);
+    console.log(link[0]);
+    //Como devuelve un arreglo de objeto se tiene que manejar desde la posicion 0
+    res.render('links/edit', {link: link[0]});
 });
 
 module.exports = router;
