@@ -53,11 +53,10 @@ router.get('/edit/:id', async(req,res)=>{
     // console.log(req.params.id);
     // res.send('DELETED');
     const { id } = req.params;
-    // await pool.query('UPDATE FROM links SET  WHERE ID = ?', [id]);
-    // res.redirect('/links');
-    res.send('RECIVED');
-    console.log('REVICED');
+    const links = await pool.query('SELECT * FROM links WHERE id = ?', [id]);
+    console.log(links);
     
+    res.render('links/edit', {links: links});
 });
 
 module.exports = router;
