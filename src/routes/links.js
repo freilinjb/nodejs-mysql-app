@@ -30,6 +30,7 @@ router.post('/add', async (req,res) =>{
     // await pool.query('INSERT INTO links(title,url,description) VALUES(?,?,?)',title,url,description);
     await pool.query('INSERT INTO links set ?',[newLink]);
     // console.log('INSERT INTO links set ?',[newLink]);
+    req.flash('success','Link saved successfully');
     res.redirect('/links')
 });
 

@@ -2,8 +2,10 @@ const express = require('express');
 const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const path  = require('path');
-
-
+const flash = require('connect-flash')//midleware
+const session = require('express-session');
+const MySQLStore = require('express-mysql-session');
+const { database } = require('./keys');
 //Initializations
 const app = express();
 
@@ -23,15 +25,26 @@ app.engine('.hbs', exphbs({
 app.set('view engine', '.hbs');
 
 //Middlewares
+app.use(session({
+    secret: 'faztmysqlnodesession',
+    resave: false,//Para que no se renueve la secion
+    saveUninitialized: false, //Para que no se vuelva a establecer la secion
+    store: new MySQLStore(database)//Esta propiedad dice donde va a guardar la secion de la base de dato
+    //MySQLStore - necesita la clave de sql
+}));
+app.use(flash());
 app.use(morgan('dev'));
 // //Aceptar los datos (formulkarios) que envia el usuario
 app.use(express.urlencoded({extended: false}));
 // //Para recibir JSON desde nuestra aplicacion - y validar lo que podemos conseguir en futuras mejoras
 app.use(express.json());
 
+
 //Global Variables
 //Toma la informacion del usuario, toma lo que el servidor quiere reponder, toma una funcion para continuar el resto del codigo
 app.use((req, res, next) =>{
+    //Hacer disponible este mensaje desde todas las vistas
+    app.locals.success = req.flash('success');
     next();
 });
 
