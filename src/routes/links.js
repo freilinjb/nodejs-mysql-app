@@ -30,8 +30,7 @@ router.post('/add', async (req,res) =>{
     // await pool.query('INSERT INTO links(title,url,description) VALUES(?,?,?)',title,url,description);
     await pool.query('INSERT INTO links set ?',[newLink]);
     // console.log('INSERT INTO links set ?',[newLink]);
-    
-    res.send('Reciviend');
+    res.redirect('/links')
 });
 
 router.get('/', async (req, res) =>{
@@ -43,8 +42,11 @@ router.get('/', async (req, res) =>{
 });
 
 router.get('/delete/:id', async(req,res)=>{
-    console.log(req.params.id);
-    res.send('DELETED');
+    // console.log(req.params.id);
+    // res.send('DELETED');
+    const { id } = req.params;
+    await pool.query('DELETE FROM links WHERE ID = ?', [id]);
+    res.redirect('/links');
 })
 
 module.exports = router;

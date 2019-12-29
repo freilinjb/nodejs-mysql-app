@@ -1,7 +1,7 @@
 <div class="container p-4" style="margin-top: 80px;">
     <div class="row">
         {{#each links}}
-        <div class="col-md-6 mx-auto mb-2">
+        <div class="col-md-3 mx-auto mb-2">
             <div class="card text-center">
                 <div class="card-body">
                     <a href="{{url}}" target="_blank">
@@ -12,13 +12,19 @@
                     <p class="m-2"> {{description}}</p>
                     <p><time datetime="{{create_at}}"> {{timeago create_at}} </time></p>
                     <div class="">
-                        <a href="/delete/{{id}}" class="btn btn-danger btn-block">Delete Link</a>
-                        <a href="/edit/{{id}}" class="btn btn-secondary btn-block">Edit</a>
+                        <a href="/links/delete/{{id}}" class="btn btn-danger">Delete Link</a>
+                        <a href="/links/edit/{{id}}" class="btn btn-secondary">Edit</a>
                     </div>
                 </div>
             </div>
         </div>
-        {{!-- {{this}} --}}
+        {{else}}
+            <div class="col-md-4 mx-auto">
+                <div class="card card-body text-center">
+                    <p>There are not links saved yed</p>
+                    <a href="/links/add">Create One!</a>
+                </div>
+            </div>
         {{/each}}
     </div>
 </div>
