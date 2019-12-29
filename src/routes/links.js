@@ -42,4 +42,9 @@ router.get('/', async (req, res) =>{
     
 });
 
+router.get('/delete/:id', async(req,res)=>{
+    console.log(req.params.id);
+    res.send('DELETED');
+})
+
 module.exports = router;
