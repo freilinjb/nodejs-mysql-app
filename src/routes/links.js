@@ -34,7 +34,7 @@ router.post('/add',isLoggetIn, async (req,res) =>{
     res.redirect('/links')
 });
 
-router.get('/', async (req, res) =>{
+router.get('/',isLoggetIn, async (req, res) =>{
     const links = await pool.query('SELECT * FROM links');
     console.log(links);
     // res.send('Listas iran aqui')
