@@ -49,6 +49,7 @@ app.use((req, res, next) =>{
     //Hacer disponible este mensaje desde todas las vistas
     app.locals.success = req.flash('success');
     app.locals.message = req.flash('message');
+    app.locals.user = req.user;//Dato de secion del usuario
     next();
 });
 
