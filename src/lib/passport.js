@@ -22,10 +22,18 @@ passport.use('local.signup', new LocalStrategy({
     newUser.username = username.toLowerCase();
     newUser.password = await helpers.encryptPassword(newUser.password);
     const result = await pool.query('INSERT INTO users SET ? ', newUser);
-    console.log('Clave',newUser.password);
-    console.log(result);
+    newUser.id =  result.insertId; //El result hay una propiedad que devuelte el IdInsertado
+    return done(null, newUser); //El null es porque no va a devolver ningun null
 }));
 
-// passport.serializeUser((usr, done) =>{
+//Guardo el Id del usuario
+passport.serializeUser((user, done) =>{
+    done(null,user.id);
+});
 
-// });
+//Toma el id para volver a optener los datos
+passport.deserializeUser(async (id,done) => {
+    //Devuelve un arreglo
+    const rows = await pool.query('SELECT * FROM users WHERE id = ?',[id]);
+    done(null, rows[0]);
+});
