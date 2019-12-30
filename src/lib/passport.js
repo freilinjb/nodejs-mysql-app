@@ -5,6 +5,17 @@ const pool = require('../database');
 
 const helpers = require('./helpers');
 
+passport.use('local.signin', new LocalStrategy({
+    usernameField: 'username',
+    passwordField: 'password',
+    passReqToCallback: true
+}, async(req, username, password, done) =>{
+    console.log(req.body);
+    console.log(username);
+    console.log(password);
+    
+}));
+
 passport.use('local.signup', new LocalStrategy({
     usernameField: 'username',
     passwordField: 'password',
