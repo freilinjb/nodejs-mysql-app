@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
-
+const { isLoggetIn } = require('../lib/auth');
 const passport = require('passport');
 
+//Este medodo no deve protegerse, ya que es solo para que el usuario se registre
 router.get('/signup', (req, res) => {
     res.render('auth/signup');
 });
@@ -36,12 +37,14 @@ router.post('/signup', passport.authenticate('local.signup', {
       })(req, res, next)
   });
 
-router.get('/profile', (req, res) =>{
+
+//Primero verifica si el usuario se ha registrado si no verifica la funcion isLoggetIn que lo redirecciona signin
+router.get('/profile', isLoggetIn, (req, res) =>{
     res.render('profile');
 });
 
 router.get('/logout', (req, res) =>{
-    req.logOut();
+    req.logOut(); 
     res.redirect('/signin');
 });
 
