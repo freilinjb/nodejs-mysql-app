@@ -3,19 +3,19 @@ const router = express.Router();
 
 //Coneccion de base de dato
 const pool = require('../database');
-
+const { isLoggetIn } = require('../lib/auth');
 //PROBANDO SI FUNCIONA EL DIRECTORIO
 // router.get('/add', (req, res)=>{
 //     res.send('form');
 // })
 
 
-router.get('/add', (req, res)=>{
+router.get('/add', isLoggetIn, (req, res)=>{
     res.render('links/add');
 })
 
 //Funcion async - asincrona
-router.post('/add', async (req,res) =>{
+router.post('/add',isLoggetIn, async (req,res) =>{
     // console.log(req.body);
 
     const { title, url, description } = req.body;
@@ -42,7 +42,7 @@ router.get('/', async (req, res) =>{
     
 });
 
-router.get('/delete/:id', async(req,res)=>{
+router.get('/delete/:id',isLoggetIn, async(req,res)=>{
     // console.log(req.params.id);
     // res.send('DELETED');
     const { id } = req.params;
@@ -51,7 +51,7 @@ router.get('/delete/:id', async(req,res)=>{
     res.redirect('/links');
 });
 
-router.get('/edit/:id', async(req,res)=>{
+router.get('/edit/:id',isLoggetIn, async(req,res)=>{
     // console.log(req.params.id);
     // res.send('DELETED');
     const { id } = req.params;
@@ -61,7 +61,7 @@ router.get('/edit/:id', async(req,res)=>{
     res.render('links/edit', {link: link[0]});
 });
 
-router.post('/edit/:id', async(req, res)=>{
+router.post('/edit/:id', isLoggetIn, async(req, res)=>{
     const { id } = req.params;
     const { title, url, description } = req.body;
 
