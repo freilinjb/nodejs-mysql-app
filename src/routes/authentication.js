@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { isLoggetIn } = require('../lib/auth');
+const { isLoggetIn, isNotLoggetIn } = require('../lib/auth');
 const passport = require('passport');
 
 //Este medodo no deve protegerse, ya que es solo para que el usuario se registre
-router.get('/signup', (req, res) => {
+router.get('/signup', isNotLoggetIn, (req, res) => { //isNotLoggetIn redirecciona a profile si el usuario esta logueado ya
     res.render('auth/signup');
 });
 
@@ -18,13 +18,13 @@ router.get('/signup', (req, res) => {
 //     res.send('received');
 // });
 
-router.post('/signup', passport.authenticate('local.signup', {
+router.post('/signup', isNotLoggetIn, passport.authenticate('local.signup', {
     successRedirect: '/profile',
     failureRedirect: '/signup',
     failureFlash: true
   }));
 
-  router.get('/signin', (req, res) =>{
+  router.get('/signin',isNotLoggetIn, (req, res) =>{
       res.render('auth/signin');
   })
 

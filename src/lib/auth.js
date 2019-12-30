@@ -4,6 +4,15 @@ module.exports = {
             return next();
         }
         return res.redirect('/signin');//Si no he logueado redireccionalo a signin para que se loguee primero
+    },
+
+    isNotLoggetIn(req, res, next){
+        if(!req.isAuthenticated()){
+            return next();
+        }
+        else{
+            return res.redirect('/profile');
+        }
     }
 }; 
 
