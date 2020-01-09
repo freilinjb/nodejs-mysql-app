@@ -22,7 +22,8 @@ router.post('/add',isLoggetIn, async (req,res) =>{
     const newLink = {
         title,
         url,
-        description
+        description,
+        user_id: req.user.id
     }
     //Esto va a tomar tiempo
     console.log(newLink);
@@ -35,7 +36,7 @@ router.post('/add',isLoggetIn, async (req,res) =>{
 });
 
 router.get('/',isLoggetIn, async (req, res) =>{
-    const links = await pool.query('SELECT * FROM links');
+    const links = await pool.query('SELECT * FROM links WHERE user_id = ?',[req.user.id]);
     console.log(links);
     // res.send('Listas iran aqui')
     res.render('links/list', {links});
