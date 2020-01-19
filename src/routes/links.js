@@ -11,8 +11,8 @@ const { isLoggetIn } = require('../lib/auth');
 
 
 router.get('/add', isLoggetIn, (req, res)=>{
-    res.render('links/add');
-})
+    res.render('links/add', {title: 'Add new Link'});
+});
 
 //Funcion async - asincrona
 router.post('/add',isLoggetIn, async (req,res) =>{
@@ -32,14 +32,14 @@ router.post('/add',isLoggetIn, async (req,res) =>{
     await pool.query('INSERT INTO links set ?',[newLink]);
     // console.log('INSERT INTO links set ?',[newLink]);
     req.flash('success','Link saved successfully');
-    res.redirect('/links')
+    res.redirect('/links',)
 });
 
 router.get('/',isLoggetIn, async (req, res) =>{
     const links = await pool.query('SELECT * FROM links WHERE user_id = ?',[req.user.id]);
     console.log(links);
     // res.send('Listas iran aqui')
-    res.render('links/list', {links});
+    res.render('links/list', {links, title: 'Lista de enlace'});
     
 });
 

@@ -40,12 +40,12 @@ router.post('/signup', isNotLoggetIn, passport.authenticate('local.signup', {
 
 //Primero verifica si el usuario se ha registrado si no verifica la funcion isLoggetIn que lo redirecciona signin
 router.get('/profile', isLoggetIn, (req, res) =>{
-    res.render('profile');
+    res.render('profile', {title: 'Link app'});
 });
 
 router.get('/logout', (req, res) =>{
     req.logOut(); 
-    res.redirect('/signin');
+    res.redirect('/signin', {title: 'Sign-in'});
 });
 
 module.exports = router;
